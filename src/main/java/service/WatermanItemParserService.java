@@ -62,6 +62,7 @@ public class WatermanItemParserService {
         }
         return item;
     }
+
     private void addItemGroupeFromHTMLToItem(WatermanItem item, Document itemDocument) {
         /*
          <div class="breadcrumbs">
@@ -93,6 +94,8 @@ public class WatermanItemParserService {
         // <td data-th="Цена, руб">
         if (element1.attr("data-th").equals("Цена, руб")) {
             item.setCurrency("Rub");
+        } else {
+            item.setCurrency("Other");
         }
     }
 
