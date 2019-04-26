@@ -11,4 +11,5 @@ public class WatermanItem {
     private Long code;
     private BigDecimal price;
     private String groupe;
+    private String currency;
 }
