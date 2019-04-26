@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 @Log
 public class WatermanItemParserService {
-    private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";
+    //private final static String WATERMAN_ADDRESS = "http://www.waterman-t.ru/";
     private final static String WATERMAN_FIND_PAGE = "http://www.waterman-t.ru/search/result?q=";
     private final static String WATERMAN_ITEM_PAGE = "http://www.waterman-t.ru/products/";
 
@@ -56,14 +56,12 @@ public class WatermanItemParserService {
                     addItemPriceFromHTMLToItem(item, elementsItem);
                 }
             }
-
             log.info(item.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return item;
     }
-
     private void addItemGroupeFromHTMLToItem(WatermanItem item, Document itemDocument) {
         /*
          <div class="breadcrumbs">
@@ -83,13 +81,12 @@ public class WatermanItemParserService {
         String groupe = itemDocument.getElementsByClass("breadcrumb--text").last().html().
                 replace("<span>", "").replace("</span>", "").trim();
         item.setGroupe(groupe);
-
     }
 
     private void addItemPriceFromHTMLToItem(WatermanItem item, Element elementsItem) {
         //<span class="js-actualPrice">49</span>
         String price = elementsItem.getElementsByClass("js-actualPrice").html();
-        item.setPrice(new BigDecimal(price).setScale(2));
+        item.setPrice(new BigDecimal(price));
     }
 
     private void addItemCurrencyFromHTMLToItem(WatermanItem item, Element element1) {
@@ -110,5 +107,4 @@ public class WatermanItemParserService {
         // <tr class="_product-config--item" data-sku="2 124">
         return elementsItem.attr("data-sku").trim().replace(" ", "");
     }
-
 }
